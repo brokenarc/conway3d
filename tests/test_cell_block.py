@@ -14,16 +14,20 @@ z=0           z=1           z=2           z=3
 """
 
 
-class IdentityState(Enum):
+class TestState(Enum):
     IDENTITY = 0
 
 
-class NullDriver(CellDriver):
-    def default_state(self) -> IdentityState:
-        return IdentityState.IDENTITY
+class TestDriver(CellDriver):
+    def empty_state(self) -> TestState:
+        return TestState.IDENTITY
 
-    def next_state(self, state: IdentityState, **kwargs) -> IdentityState:
-        return IdentityState.IDENTITY
+    def first_state(self, x: int, y: int, z: int,
+                    cell_block: CellBlock) -> TestState:
+        return TestState.IDENTITY
+
+    def next_state(self, state: TestState, **kwargs) -> TestState:
+        return TestState.IDENTITY
 
 
 @pytest.mark.parametrize(
@@ -42,8 +46,8 @@ class NullDriver(CellDriver):
     ]
 )
 def test_cell_block_get_index(x: int, y: int, z: int, expected: int):
-    cb = CellBlock(4, 4, 4, NullDriver())
-    assert cb._get_index(x, y, z) == expected
+    cb = CellBlock(4, 4, 4, TestDriver())
+    assert cb.__get_index(x, y, z) == expected
 
 
 @pytest.mark.parametrize(
@@ -59,7 +63,7 @@ def test_cell_block_get_index(x: int, y: int, z: int, expected: int):
 )
 def test_cell_block_get_neighbor_indexes(x: int, y: int, z: int,
                                          expected: tuple[int]):
-    cb = CellBlock(4, 4, 4, NullDriver())
+    cb = CellBlock(4, 4, 4, TestDriver())
     assert cb.get_neighbor_indexes(x, y, z) == expected
 
 
@@ -73,5 +77,5 @@ def test_cell_block_get_neighbor_indexes(x: int, y: int, z: int,
     ]
 )
 def test_cell_block_get_neighbor_count(x: int, y: int, z: int, expected: int):
-    cb = CellBlock(4, 4, 4, NullDriver())
+    cb = CellBlock(4, 4, 4, TestDriver())
     assert cb.get_neighbor_count(x, y, z) == expected

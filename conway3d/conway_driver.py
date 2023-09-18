@@ -30,7 +30,7 @@ class BasicConwayDriver(CellDriver[ConwayCellState]):
         """
         self._quantum = quantum
 
-    def default_state(self) -> ConwayCellState:
+    def empty_state(self) -> ConwayCellState:
         return ConwayCellState.DEAD
 
     def next_state(self, x: int, y: int, z: int,
