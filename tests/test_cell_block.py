@@ -1,5 +1,7 @@
-import pytest
 from enum import Enum
+
+import pytest
+
 from conway3d import CellBlock, CellDriver
 
 """
@@ -11,8 +13,10 @@ z=0           z=1           z=2           z=3
 12 13 14 15   28 29 30 31   44 45 46 47   60 61 62 63
 """
 
+
 class IdentityState(Enum):
     IDENTITY = 0
+
 
 class NullDriver(CellDriver):
     def default_state(self) -> IdentityState:
@@ -20,7 +24,6 @@ class NullDriver(CellDriver):
 
     def next_state(self, state: IdentityState, **kwargs) -> IdentityState:
         return IdentityState.IDENTITY
-
 
 
 @pytest.mark.parametrize(

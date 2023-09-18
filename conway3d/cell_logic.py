@@ -1,20 +1,25 @@
 from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import Generic, TypeVar
-from typing import Generic, cast
+from typing import Generic, TypeVar, cast
 
 T_CELL_STATE = TypeVar('T_CELL_STATE', bound=Enum)
 
 
 class CellDriver(ABC, Generic[T_CELL_STATE]):
+    """A cell driver provides the logic that determines what the next state
+    of any given cell within a block should be.
+    """
+
     @abstractmethod
     def default_state(self) -> T_CELL_STATE:
         """The default state value to initialize cell populations with.
         """
 
     @abstractmethod
-    def next_state(self, x: int, y: int, z: int, cell_block: CellBlock) -> T_CELL_STATE:
+    def next_state(self, x: int, y: int, z: int,
+                   cell_block: CellBlock) -> T_CELL_STATE:
         """Determines the next state for a cell.
 
         Args:
@@ -95,13 +100,14 @@ class CellBlock(Generic[T_CELL_STATE]):
         return len(self.get_neighbor_indexes(x, y, z))
 
     def next_generation(self):
-        next_cells = self._cells.copy()
+        """Progress this block to its next generation.
+        """
+        cells = self._cells.copy()
 
         for z in range(0, self._z_size):
             for y in range(0, self._y_size):
                 for x in range(0, self._x_size):
-                    index = self._get_index(x, y, z)
-                    next_cells[index] = self._driver.next_state(
-                        self._cells[index], self
-                    )
-        self._cells = next_cells
+                    i = self._get_index(x, y, z)
+                    cells[i] = self._driver.next_state(x, y, z, self)
+
+        self._cells = cells
