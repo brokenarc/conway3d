@@ -2,7 +2,7 @@ from enum import Enum
 
 import pytest
 
-from conway3d import CellBlock, CellDriver
+from conway3d.logic import CellBlock, CellDriver
 
 """
 Test functions use this test (x,y,z) data:
@@ -47,7 +47,7 @@ class TestDriver(CellDriver):
 )
 def test_cell_block_get_index(x: int, y: int, z: int, expected: int):
     cb = CellBlock(4, 4, 4, TestDriver())
-    assert cb.__get_index(x, y, z) == expected
+    assert cb._get_index(x, y, z) == expected
 
 
 @pytest.mark.parametrize(

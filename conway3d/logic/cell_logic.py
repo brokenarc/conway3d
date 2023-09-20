@@ -63,7 +63,7 @@ class CellBlock(Generic[TCS]):
         self._empty = driver.empty_state()
         self._generation = 0
         self._cells = [self._empty] * (x_size * y_size * z_size)
-        self.__populate()
+        self._populate()
 
     def __len__(self) -> int:
         return len(self._cells)
@@ -71,14 +71,14 @@ class CellBlock(Generic[TCS]):
     def __getitem__(self, item):
         return self._cells[item]
 
-    def __populate(self):
+    def _populate(self):
         for z in range(0, self._z_size):
             for y in range(0, self._y_size):
                 for x in range(0, self._x_size):
-                    i = self.__get_index(x, y, z)
+                    i = self._get_index(x, y, z)
                     self._cells[i] = self._driver.first_state(x, y, z, self)
 
-    def __get_index(self, x: int, y: int, z: int) -> int:
+    def _get_index(self, x: int, y: int, z: int) -> int:
         """Compute the cell array index from x, y, z coordinates.
 
         Returns:
@@ -109,15 +109,15 @@ class CellBlock(Generic[TCS]):
         return self._generation
 
     def get_cell(self, x: int, y: int, z: int) -> TCS:
-        return self._cells[self.__get_index(x, y, z)]
+        return self._cells[self._get_index(x, y, z)]
 
     def is_empty(self, x: int, y: int, z: int) -> bool:
         return self.get_cell(x, y, z) == self._empty
 
     def get_neighbor_indexes(self, x: int, y: int, z: int) -> tuple[int]:
-        cell = self.__get_index(x, y, z)
+        cell = self._get_index(x, y, z)
         indexes = [
-            self.__get_index(xx, yy, zz)
+            self._get_index(xx, yy, zz)
             for zz in (z - 1, z, z + 1)
             for yy in (y - 1, y, y + 1)
             for xx in (x - 1, x, x + 1)
@@ -143,7 +143,7 @@ class CellBlock(Generic[TCS]):
         for z in range(0, self._z_size):
             for y in range(0, self._y_size):
                 for x in range(0, self._x_size):
-                    i = self.__get_index(x, y, z)
+                    i = self._get_index(x, y, z)
                     cells[i] = self._driver.next_state(x, y, z, self)
 
         for i, state in enumerate(cells):

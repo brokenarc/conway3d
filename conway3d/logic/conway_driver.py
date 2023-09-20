@@ -33,6 +33,10 @@ class BasicConwayDriver(CellDriver[ConwayCellState]):
     def empty_state(self) -> ConwayCellState:
         return ConwayCellState.DEAD
 
+    def first_state(self, x: int, y: int, z: int,
+                    cell_block: CellBlock) -> ConwayCellState:
+        return self.empty_state()
+
     def next_state(self, x: int, y: int, z: int,
                    cell_block: CellBlock) -> ConwayCellState:
         """Determine the next cell state for the given parameters.
