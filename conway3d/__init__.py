@@ -1,1 +1,1 @@
-from .blendutil import get_child_by_name
+from .blendutil import get_child_by_name, set_active_layer_collection
