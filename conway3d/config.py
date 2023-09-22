@@ -5,6 +5,10 @@ class Configuration:
     grid_size = (8, 8, 8)
     """The size of the Conway grid measured in number of cells."""
 
+    uncertainty = 0.1
+    """The uncertainty factor to use for drivers that support rule
+    fluctuations"""
+
     cell_size = 1.0
     """The size of each rendered cell in Blender units."""
 
