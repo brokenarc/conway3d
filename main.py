@@ -1,16 +1,35 @@
-# This is a sample Python script.
+import bpy
+import importlib
+import os
+import sys
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# ----------------------------------------------------------------------------
+# Add the path of this script to sys.path so its modules can be imported.
+# ----------------------------------------------------------------------------
+script_dir = os.path.dirname(bpy.context.space_data.text.filepath)
+sys.path.append(script_dir)
 
+# ----------------------------------------------------------------------------
+# Project imports
+# ----------------------------------------------------------------------------
+import conway3d
+from conway3d import CubeCellFactory
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# ----------------------------------------------------------------------------
+# Reload the modules for this project
+# ----------------------------------------------------------------------------
+MOD_PREFIX = 'conway3d'
+map(
+    importlib.reload,
+    [module for (name, module) in sys.modules.items()
+     if name.startswith(MOD_PREFIX)]
+)
 
+# ----------------------------------------------------------------------------
+# Start the actual project
+# ----------------------------------------------------------------------------
+config = conway3d.Configuration
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+cf = CubeCellFactory(config.grid_size, config.cell_size,
+                     config.cell_spacing, config)
+cf.add_all_cells()

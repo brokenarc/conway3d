@@ -5,7 +5,7 @@ import bpy
 from mathutils import Vector
 
 from ..config import ConfigType
-from conway3d.datamodel.types import IVector
+from ..datamodel import IVector, generate_locations
 
 C = bpy.context
 D = bpy.data
@@ -95,10 +95,8 @@ class CubeCellFactory(CellFactory):
         """
         block_x, block_y, block_z = self._block_size
         cells = {}
-        for z in range(0, block_z):
-            for y in range(0, block_y):
-                for x in range(0, block_x):
-                    cell = self.add_cell((x, y, z))
-                    cells[cell.name] = cell
+        for xyz in generate_locations(self._block_size):
+            cell = self.add_cell(xyz)
+            cells[cell.name] = cell
 
         return cells

@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from typing import Any
 
 import bpy
-from mathutils import Vector
 
 from .cell_factory import CubeCellFactory
 from ..blendutil import set_active_layer_collection
@@ -11,6 +9,7 @@ from ..datamodel import CellBlock, T_state
 
 C = bpy.context
 D = bpy.data
+
 
 class CellBlockView:
     __slots__ = ('_collection', '_cells')

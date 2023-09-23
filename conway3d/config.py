@@ -12,7 +12,7 @@ class Configuration:
     cell_size = 1.0
     """The size of each rendered cell in Blender units."""
 
-    cell_spacing = 0.5
+    cell_spacing = 0.25
     """The spacing between each cell in Blender units."""
 
     cell_name = 'Cell-{:02d}{:02d}{:02d}'
