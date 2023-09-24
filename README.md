@@ -12,8 +12,7 @@ button.
 
 Sample output with lights and camera manually adjusted.
 
-https://github.com/brokenarc/conway3d/assets/123289273/8fcc622f-7401-4fe8-9285-80852b9e9ab6
-
+https://github.com/brokenarc/conway3d/assets/123289273/9480852d-c9f7-49a0-b978-bc7ec1dfe017
 
 ## TODO
 
