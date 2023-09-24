@@ -3,22 +3,20 @@ from typing import Callable
 from conway3d.datamodel.types import IVector
 
 NeighborModel = Callable[[IVector], list[IVector]]
-"""Defines the signature for a function that will accept a cell's location
-and then return the locations of cells that are considered to be that cell's
-neighbors.
+"""Defines the signature for a function that will accept a cell's location and then return the
+locations of cells that are considered to be that cell's neighbors.
 
-It is left to the user to determine if the returned locations are within any
-desired boundary constraints.
+It is left to the user to determine if the returned locations are within any desired boundary
+constraints.
 
-Implementations must exclude the original cell's location from the resulting
-list of neighbor cell locations.
+Implementations must exclude the original cell's location from the resulting list of neighbor cell
+locations.
 
 Args:
     IVector: The cell location
 
 Returns:
-    list[IVector]: The locations of cells that are considered neighbors to
-    the given cell.
+    list[IVector]: The locations of cells that are considered neighbors to the given cell.
 """
 
 

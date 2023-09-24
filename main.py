@@ -12,8 +12,7 @@ sys.path.append(script_dir)
 # ----------------------------------------------------------------------------
 # Project imports
 # ----------------------------------------------------------------------------
-import conway3d
-from conway3d import CubeCellFactory
+from conway3d import create_animation
 
 # ----------------------------------------------------------------------------
 # Reload the modules for this project
@@ -28,8 +27,4 @@ map(
 # ----------------------------------------------------------------------------
 # Start the actual project
 # ----------------------------------------------------------------------------
-config = conway3d.Configuration
-
-cf = CubeCellFactory(config.grid_size, config.cell_size,
-                     config.cell_spacing, config)
-cf.add_all_cells()
+create_animation()

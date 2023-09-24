@@ -1,2 +1,1 @@
-from .cells import CellBlockView
-from .cell_factory import CellFactory, CubeCellFactory
+from .cell_block_view import CellBlockView
