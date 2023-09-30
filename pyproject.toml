@@ -3,9 +3,9 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "designtools"
-version = "0.1b1"
-description = "Assorted visual design utilities"
+name = "conway3d"
+version = "0.1"
+description = "Blender Python script to create an animation using a 3D variant of Conway's Game of Life"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
@@ -26,6 +26,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
+    "Topic :: Artistic Software",
     "Topic :: Multimedia :: Graphics",
 ]
 
